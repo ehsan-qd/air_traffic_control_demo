@@ -1,0 +1,45 @@
+# Two hours of a busy ocean for the unattended TV loop (/loop_demo).
+# Background filings are not steered into conflicts; a scripted conflicting
+# request arrives about every 12 minutes so each one is solved in view.
+time:
+  default_speed: 10
+  freeze_sky_during_solve: false
+separation:
+  lateral_nm: 30
+  vertical_ft: 1000
+  time_buffer_min: 3
+schedule:
+  envelope_min: 10
+objective:
+  w_theta: 2
+  w_chi: 1
+  p: 2
+traffic:
+  initial_active_flights: 90
+  initial_planned_flights: 8
+  initial_stacked_targets: 3
+  initial_random_route_fraction: 0.35
+  track_count: 8
+  track_spacing_deg_lat: 1.2
+  filings_per_hour: 24
+  filing_lead_time_min: [30, 65]
+  random_route_fraction: 0.4
+skeleton:
+  K: 2
+  J: 2
+fallback:
+  expanded_skeleton: {K: 3, J: 2}
+director:
+  conflict_injection_probability: 0
+  conflict_kind_weights: {spatial_only: 0, spatiotemporal: 1}
+  scripted_beats:
+    - {at_min: 2.5, action: file_flight, params: {callsign: XAT417, conflict_with: XBQ527, kind: spatiotemporal}}
+    - {at_min: 14, action: file_flight, params: {callsign: XBQ418, conflict_with: XBQ209, kind: spatiotemporal}}
+    - {at_min: 26, action: file_flight, params: {callsign: XCV419, conflict_with: XCV210, kind: spatiotemporal}}
+    - {at_min: 38, action: file_flight, params: {callsign: XDL420, conflict_with: XDL211, kind: spatiotemporal}}
+    - {at_min: 50, action: file_flight, params: {callsign: XEW421, conflict_with: XEW212, kind: spatiotemporal}}
+    - {at_min: 62, action: file_flight, params: {callsign: XAT422, kind: spatiotemporal}}
+    - {at_min: 74, action: file_flight, params: {callsign: XBQ423, kind: spatiotemporal}}
+    - {at_min: 86, action: file_flight, params: {callsign: XCV424, kind: spatiotemporal}}
+    - {at_min: 98, action: file_flight, params: {callsign: XDL425, kind: spatiotemporal}}
+    - {at_min: 110, action: file_flight, params: {callsign: XEW426, kind: spatiotemporal}}

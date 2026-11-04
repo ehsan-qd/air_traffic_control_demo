@@ -1,0 +1,6 @@
+director:
+  scripted_beats:
+    - at_min: 2
+      action: file_flight
+      params: {callsign: XAT417, conflict_with: XAT208, kind: spatiotemporal}
+

@@ -1,0 +1,5 @@
+traffic:
+  filings_per_hour: 30
+director:
+  conflict_injection_probability: 0.5
+

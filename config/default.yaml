@@ -1,0 +1,92 @@
+seed: 20250301
+time:
+  start_utc: "2025-03-01T10:00:00Z"
+  tick_s: 5
+  speed_options: [1, 10, 60, 300]
+  default_speed: 60
+  freeze_sky_during_solve: true
+  ui_tick_hz: 10
+airspace:
+  lon_range_deg: [-62, -2]
+  lat_range_deg: [38, 64]
+  oceanic_entry_lon_deg: -52
+  oceanic_exit_lon_deg: -12
+  fir_boundary_lon_deg: -30
+  legal_levels_eastbound: [310, 330, 350, 370, 390, 410]
+separation:
+  lateral_nm: 30
+  time_buffer_min: 3
+  vertical_ft: 1000
+skeleton:
+  K: 1
+  J: 1
+  lateral_spacing_nm: 30
+  waypoints_per_flight: 12
+  subintervals_per_edge: 4
+  edge_cost_substeps: 20
+  climb_rate_fpm: 1500
+schedule:
+  envelope_min: 10
+objective:
+  w_theta: 2
+  w_chi: 1
+  p: 2
+qubo:
+  time_quantum_s: 5
+  prune_unreachable: true
+  lambda_auto: true
+  lambda_margin: 1.5
+  lambda_override: {}
+  normalise: max_abs
+solver:
+  backend: pbit_emulator
+  sweeps: 200000
+  beta_start: 0.0001
+  beta_end: 32
+  beta_schedule: linear
+  replicas: 24
+  progress_every_sweeps: 2000
+  snapshot_every_sweeps: 2000
+  snapshot_betas: [0.6, 8, 32]
+  time_budget_s: 5
+  orbit:
+    endpoint_env: ORBIT_ENDPOINT
+    api_key_env: ORBIT_API_KEY
+fallback:
+  expanded_skeleton: {K: 2, J: 2}
+  entry_delay_step_min: 5
+  entry_delay_max_min: 30
+traffic:
+  initial_active_flights: 29
+  filings_per_hour: 18
+  filing_lead_time_min: [20, 60]
+  track_count: 6
+  track_spacing_deg_lat: 1
+  random_route_fraction: 0.25
+  level_weights: {310: 0.08, 330: 0.15, 350: 0.25, 370: 0.25, 390: 0.17, 410: 0.10}
+  mach_range: [0.80, 0.86]
+  callsign_prefixes: [XAT, XBQ, XCV, XDL, XEW]
+  aircraft_types: [B789, A359, B77W, A333, B38M, A21N]
+director:
+  enabled: true
+  conflict_injection_probability: 0.35
+  conflict_kind_weights: {spatial_only: 0.4, spatiotemporal: 0.6}
+  scripted_beats: []
+wind:
+  source: synthetic
+  era5_path: null
+  jet_core_kt: 140
+  jet_width_deg: 4
+  jet_lat_deg: 48.6
+  meander_amp_deg: 2.4
+  meander_wavenumber: 1.25
+  drift_deg_per_hour: 1.5
+  level_peak_fl: 340
+  level_width_fl: 90
+  background_westerly_kt: 25
+  forecast_error_kt: 0
+ui:
+  show_synthetic_badge: true
+  ghost_max_paths: 40
+  default_screen: control_room
+

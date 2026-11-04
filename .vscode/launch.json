@@ -1,0 +1,10 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {"name": "Backend (uvicorn, reload)", "type": "debugpy", "request": "launch", "module": "uvicorn", "args": ["nat_demo.api.app:create_app", "--factory", "--reload", "--host", "127.0.0.1", "--port", "8765"], "cwd": "${workspaceFolder}/backend", "python": "${workspaceFolder}/backend/.venv/bin/python", "env": {"NAT_DEMO_SCENARIO": "hero_crossing"}, "justMyCode": false},
+    {"name": "Frontend (Vite)", "type": "node", "request": "launch", "runtimeExecutable": "npm", "runtimeArgs": ["run", "dev"], "cwd": "${workspaceFolder}/web"},
+    {"name": "Solve one scenario (headless)", "type": "debugpy", "request": "launch", "module": "nat_demo.cli", "args": ["solve", "--scenario", "hero_crossing", "--verbose"], "cwd": "${workspaceFolder}/backend", "python": "${workspaceFolder}/backend/.venv/bin/python"}
+  ],
+  "compounds": [{"name": "Demo: backend + frontend", "configurations": ["Backend (uvicorn, reload)", "Frontend (Vite)"], "stopAll": true}]
+}
+

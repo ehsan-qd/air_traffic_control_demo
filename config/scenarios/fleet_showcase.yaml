@@ -1,0 +1,31 @@
+# A moving oceanic fleet with distinct, independently checked encounters.
+time:
+  default_speed: 10
+  freeze_sky_during_solve: false
+traffic:
+  initial_active_flights: 90
+  initial_planned_flights: 8
+  initial_stacked_targets: 3
+  initial_random_route_fraction: 0.35
+  track_count: 8
+  track_spacing_deg_lat: 1.2
+  filings_per_hour: 6
+  filing_lead_time_min: [30, 65]
+  random_route_fraction: 0.4
+skeleton:
+  K: 2
+  J: 2
+fallback:
+  expanded_skeleton: {K: 3, J: 2}
+director:
+  conflict_injection_probability: 0.8
+  conflict_kind_weights: {spatial_only: 0, spatiotemporal: 1}
+  scripted_beats:
+    - {at_min: 0.1, action: file_flight, params: {callsign: XAT417, conflict_with: XAT208, kind: spatiotemporal}}
+    - {at_min: 0.1, action: file_flight, params: {callsign: XBQ418, conflict_with: XBQ209, kind: spatiotemporal}}
+    - {at_min: 0.1, action: file_flight, params: {callsign: XCV419, conflict_with: XCV210, kind: spatiotemporal}}
+    - {at_min: 2, action: file_flight, params: {callsign: XDL420, conflict_with: XDL211, kind: spatiotemporal}}
+    - {at_min: 4, action: file_flight, params: {callsign: XEW421, conflict_with: XEW212, kind: spatiotemporal}}
+    - {at_min: 6, action: file_flight, params: {callsign: XAT422, conflict_with: XAT213, kind: spatiotemporal}}
+    - {at_min: 8, action: file_flight, params: {callsign: XBQ423, conflict_with: XBQ214, kind: spatiotemporal}}
+    - {at_min: 10, action: file_flight, params: {callsign: XCV424, conflict_with: XCV215, kind: spatiotemporal}}

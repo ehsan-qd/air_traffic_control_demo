@@ -1,0 +1,18 @@
+:root {
+  --bg:#05090c;
+  --surface:#0b1217;
+  --surface-raised:#101c23;
+  --ink:#f2f7f9;
+  --muted:#c4d2d9;
+  --dim:#a9bec9;
+  --line:#34505e;
+  --cyan:#b2dfef;
+  --cyan-bright:#dcffff;
+  --green:#b1edc8;
+  --amber:#f5ce95;
+  --red:#ffb0a5;
+  --sans:'Instrument Sans',Arial,sans-serif;
+  --body:'Lora',Georgia,serif;
+  /* Keep aligned telemetry numerals while using the brand's typeface everywhere. */
+  --mono:var(--sans);
+}

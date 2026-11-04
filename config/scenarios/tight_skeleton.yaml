@@ -1,0 +1,11 @@
+wind:
+  # Isolate the fixed-final-edge failure. With no jet-speed advantage at other
+  # levels, the expanded skeleton cannot manufacture a large arrival delay.
+  jet_core_kt: 0
+  drift_deg_per_hour: 0
+director:
+  scripted_beats:
+    - at_min: 2
+      action: file_flight
+      params: {callsign: XAT417, conflict_with: XAT208, kind: spatiotemporal, final_edge: true, offset_min: 4}
+

@@ -1,0 +1,39 @@
+# Three real insertions paced for the 150-second guided presentation at 10x.
+# No random filings: each loop begins with the same independently checked fleet.
+time:
+  default_speed: 10
+  freeze_sky_during_solve: false
+separation:
+  lateral_nm: 30
+  vertical_ft: 1000
+  time_buffer_min: 3
+schedule:
+  envelope_min: 10
+objective:
+  w_theta: 2
+  w_chi: 1
+  p: 2
+traffic:
+  initial_active_flights: 90
+  initial_planned_flights: 8
+  initial_stacked_targets: 3
+  initial_random_route_fraction: 0.35
+  track_count: 8
+  track_spacing_deg_lat: 1.2
+  filings_per_hour: 0
+  filing_lead_time_min: [30, 65]
+  random_route_fraction: 0.4
+skeleton:
+  K: 2
+  J: 2
+fallback:
+  expanded_skeleton: {K: 3, J: 2}
+director:
+  conflict_injection_probability: 1
+  conflict_kind_weights: {spatial_only: 0, spatiotemporal: 1}
+  scripted_beats:
+    # Filed along XBQ527's route: neither a one-level change nor a 30 NM offset alone is
+    # safe here, so the cheapest verified fix combines both before rejoining.
+    - {at_min: 2.5, action: file_flight, params: {callsign: XAT417, conflict_with: XBQ527, kind: spatiotemporal}}
+    - {at_min: 9.5, action: file_flight, params: {callsign: XBQ418, conflict_with: XBQ209, kind: spatiotemporal}}
+    - {at_min: 14.5, action: file_flight, params: {callsign: XCV419, conflict_with: XCV210, kind: spatiotemporal}}

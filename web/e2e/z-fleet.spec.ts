@@ -1,0 +1,48 @@
+import { expect, test } from '@playwright/test';
+test('Start fleet demo runs a dense real fleet through multiple verified decisions',async({page,request})=>{
+  test.setTimeout(180000);
+  await request.post('/api/control',{data:{action:'pause'}});
+  await expect.poll(async()=>{const world=await(await request.get('/api/state')).json();return world.flights.some((f:{status:string})=>f.status==='solving');},{timeout:90000,intervals:[2000]}).toBe(false);
+  await page.setViewportSize({width:1440,height:1000});
+  await page.goto('/#explore');
+  await expect(page.getByRole('button',{name:'Start fleet demo',exact:true})).toBeEnabled();
+  await page.getByRole('button',{name:'Start fleet demo',exact:true}).click();
+  await expect(page.getByRole('combobox',{name:'Scenario',exact:true})).toHaveValue('fleet_showcase');
+  await expect(page.getByRole('button',{name:'Pause simulation',exact:true})).toBeVisible();
+  await expect.poll(async()=>{const world=await(await request.get('/api/state')).json();return world.flights.filter((f:{status:string})=>f.status==='active').length;},{timeout:20000}).toBeGreaterThanOrEqual(70);
+  await expect.poll(async()=>Number(await page.locator('.feed-summary strong').textContent()),{timeout:60000,intervals:[500]}).toBeGreaterThanOrEqual(1);
+  await expect(page.locator('.candidate-matrix svg')).toBeVisible();
+  await expect(page.locator('.map-choice-overlay')).toBeVisible();
+  await page.locator('.fleet-sky').screenshot({path:'test-results/fleet-showcase-map.png'});
+  await page.locator('.decision-space').screenshot({path:'test-results/fleet-showcase-first-decision.png'});
+  await expect.poll(async()=>Number(await page.locator('.feed-summary strong').textContent()),{timeout:90000,intervals:[1000]}).toBeGreaterThanOrEqual(3);
+  await page.getByRole('button',{name:'Pause simulation',exact:true}).click();
+  await expect.poll(async()=>{const world=await(await request.get('/api/state')).json();return world.flights.some((f:{status:string})=>f.status==='solving');},{timeout:90000,intervals:[2000]}).toBe(false);
+  await page.locator('.fleet-intelligence').screenshot({path:'test-results/fleet-showcase-decisions.png'});
+  await page.evaluate(()=>window.scrollTo(0,0));
+  await page.screenshot({path:'test-results/fleet-showcase-desktop.png',fullPage:true});
+  const world=await(await request.get('/api/state')).json();expect(world.separation_losses).toBe(0);
+  await page.getByRole('button',{name:'Filter flight level 390',exact:true}).click();
+  await expect(page.getByRole('button',{name:'Filter flight level 390',exact:true})).toHaveAttribute('aria-pressed','true');
+  await page.getByRole('button',{name:'Filter flight level 390',exact:true}).click();
+  await page.setViewportSize({width:390,height:844});
+  await expect(page.getByRole('button',{name:'Enter full screen'})).toBeVisible();
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth)).toBe(true);
+  await page.evaluate(()=>window.scrollTo(0,0));
+  await page.screenshot({path:'test-results/fleet-showcase-mobile.png',fullPage:true});
+  await page.setViewportSize({width:1440,height:1000});
+  await page.getByRole('button',{name:'Flight deck 3',exact:true}).click();
+  for(const callsign of ['XBQ418','XAT417']) {
+    await page.getByRole('button',{name:`View ${callsign} cockpit`,exact:true}).click();
+    await expect(page.getByRole('region',{name:`Cockpit view for ${callsign}`})).toBeVisible();
+    await expect(page.locator('.cpdlc-display h3')).toHaveText(callsign);
+    await expect(page.getByRole('button',{name:`View ${callsign} cockpit`,exact:true})).toHaveAttribute('aria-pressed','true');
+  }
+  await page.getByRole('button',{name:'Pause cockpit preview',exact:true}).click();
+  await page.getByRole('slider',{name:'Cockpit route preview position'}).fill('15000');
+  await page.evaluate(()=>window.scrollTo(0,0));
+  await page.screenshot({path:'test-results/fleet-cockpit-selection.png',fullPage:true,animations:'disabled'});
+  await page.setViewportSize({width:390,height:844});
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth)).toBe(true);
+  await page.screenshot({path:'test-results/fleet-cockpit-mobile.png',fullPage:true,animations:'disabled'});
+});

@@ -1,0 +1,10 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {"label": "check", "type": "shell", "command": "make check", "group": {"kind": "test", "isDefault": true}, "problemMatcher": []},
+    {"label": "gen-types", "type": "shell", "command": "make types", "problemMatcher": []},
+    {"label": "bench-solver", "type": "shell", "command": "make bench", "problemMatcher": []},
+    {"label": "demo", "type": "shell", "command": "make demo", "isBackground": true, "problemMatcher": []}
+  ]
+}
+

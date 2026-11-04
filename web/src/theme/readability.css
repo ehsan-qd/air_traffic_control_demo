@@ -1,0 +1,131 @@
+/* Shared Quantum Dice typography and readable presentation layouts. */
+body { font-variant-numeric:tabular-nums; }
+button,select,input,textarea { font-family:var(--sans); }
+h1,h2,h3,h4,h5,h6,strong,b { font-family:var(--sans); }
+.screen-intro p,.workspace-heading p,
+.matrix-intro p,.hardware-panel>p,.cpdlc-note p,.fleet-method-note p,
+.study-launch p,.safety-note,.history-content>p { font-family:var(--body); }
+button:disabled,select:disabled { opacity:.58; }
+.panel-heading,.section-heading,.study-kicker,.eyebrow { letter-spacing:.055em; font-weight:600; }
+.panel-heading { min-height:44px; height:auto; padding-top:10px; padding-bottom:10px; flex-wrap:wrap; gap:8px 14px; }
+.panel-heading>span { min-width:0; }
+.tiny-tag { white-space:normal; line-height:1.5; }
+.topbar-status,.brand>span:last-child { letter-spacing:.04em; }
+.brand strong { line-height:1.5; }
+.topbar { min-height:76px; height:auto; padding-top:10px; padding-bottom:10px; gap:20px; }
+.fleet-shell .topbar,.study-shell .topbar { height:auto; min-height:76px; }
+.fleet-shell .workspace-heading p { max-width:650px; line-height:1.7; }
+.workspace-toolbar { flex-wrap:wrap; align-items:center; padding:8px 0; }
+.workspace-toolbar nav { min-height:44px; flex-wrap:wrap; }
+.scenario-toolbar { flex-wrap:wrap; gap:15px; }
+.scenario-choice,.filing-actions { flex-wrap:wrap; }
+.primary-button,.quiet-button { min-height:44px; }
+.primary-button,.primary-button:hover:not(:disabled) { color:#071019; font-weight:600; }
+.fleet-stats { grid-template-columns:1.4fr repeat(5,minmax(0,1fr)); }
+.fleet-stats>div>span { line-height:1.5; letter-spacing:.02em; }
+.fleet-stats .fleet-status>span { font-size:13px!important; }
+.fleet-status strong { font-size:12px; }
+.fleet-intelligence,.fleet-detail-grid { grid-template-columns:minmax(0,1.25fr) minmax(400px,1fr); }
+.candidate-counts>div { align-content:start; }
+.candidate-counts span { line-height:1.5; }
+.replica-summary { flex-wrap:wrap; line-height:1.6; }
+.decision-footer { gap:16px; }
+.decision-footer span { line-height:1.5; }
+.resolution-content,.resolution-row { min-width:0; }
+.feed-footer { flex-wrap:wrap; line-height:1.6; }
+.flight-strip { flex-basis:205px; min-width:205px; }
+.flight-strip small { letter-spacing:.03em; }
+.snapshot .panel-heading { min-height:58px; }
+.snapshot>p { line-height:1.7; }
+.matrix-stats { flex-wrap:wrap; line-height:1.7; }
+.inside-lower { grid-template-columns:minmax(0,1fr) minmax(360px,.55fr); }
+.hardware-stats strong { white-space:nowrap; }
+.clearance .panel-heading { letter-spacing:.03em; }
+.clearance-recipient { align-items:flex-start; flex-wrap:wrap; }
+.clearance-recipient span { max-width:none; }
+.clearance-footer { line-height:1.6; }
+.cpdlc-line { letter-spacing:.02em; }
+.map-caption { flex-wrap:wrap; line-height:1.5; }
+.map-layer-controls { top:16px; right:16px; }
+.map-title-overlay { max-width:48%; }
+.map-title-overlay p { line-height:1.6; }
+.altitude-legend { flex-wrap:wrap; gap:5px; }
+.altitude-legend>span { margin-right:4px; }
+.altitude-legend button { padding:6px 9px; }
+.selected-flight-overlay,.encounter-overlay { max-width:46%; min-width:0; }
+.selected-flight-overlay>div { flex-wrap:wrap; }
+.selected-flight-overlay p { flex-wrap:wrap; gap:8px; }
+.encounter-overlay { line-height:1.5; }
+.map-choice-overlay { width:280px; top:100px; }
+.map-choice-overlay .lattice-heading { flex-wrap:wrap; }
+.map-choice-overlay .lattice-cell { min-height:28px; }
+.lattice-heading { flex-wrap:wrap; line-height:1.5; }
+.lattice-cell strong { white-space:nowrap; }
+.lattice-cell em { margin-left:2px; }
+.lattice-cell.infeasible { background:#3b232b; border-color:#866372; }
+.lattice-cell.infeasible strong { color:#e8c5d0; }
+.lattice-cell.feasible { background:#123329; border-color:#5f9e7b; }
+.lattice-cell.feasible strong { color:#c9f9d9; }
+.airspace svg text,.profile svg text { opacity:1; }
+.fleet-map .plane-label text { font-size:16px; paint-order:stroke; stroke:#02080d; stroke-width:3px; fill:#f3fbff; }
+.fleet-map .plane-label .plane-level { font-size:13px; opacity:1; }
+.fleet-map .plane.focused .plane-label text { font-size:18px; }
+.fleet-map .plane.focused .plane-label .plane-level { font-size:14px; }
+.fleet-map .fir-region,.fleet-map .map-labels,.fleet-map .map-edge-labels { fill:#b5ced9; }
+.ocean-name { opacity:1; fill:#adc8d5; }
+.energy-chart text { fill:var(--muted); }
+footer { flex-wrap:wrap; font-size:12px; letter-spacing:.02em; line-height:1.6; padding:16px 0; }
+
+/* Give the guided narrative room to breathe alongside the map. */
+.study-shell main { max-width:1920px; padding:0 24px; }
+.study-shell footer { min-height:0; padding:12px 0; }
+
+@media (max-width:1200px) {
+  .fleet-intelligence,.fleet-detail-grid,.inside-lower { grid-template-columns:minmax(0,1fr) minmax(340px,.85fr); }
+}
+@media (max-height:950px) and (min-width:1000px) {
+  .study-shell .topbar { min-height:64px; padding-top:7px; padding-bottom:7px; }
+}
+@media (max-width:900px) {
+  .fleet-intelligence,.fleet-detail-grid,.inside-lower { grid-template-columns:1fr; }
+  .fleet-stats { grid-template-columns:repeat(3,minmax(0,1fr)); }
+  .fleet-stats>div { min-height:90px; }
+}
+@media (max-width:650px) {
+  main,.fleet-shell main { padding:22px 14px 0; }
+  .topbar,.fleet-shell .topbar,.study-shell .topbar { min-height:90px; padding:12px 14px; gap:12px; }
+  .brand { gap:10px; min-width:0; flex:1; }
+  .brand img { width:76px; }
+  .brand>span:last-child { font-size:12px; letter-spacing:.02em; }
+  .brand strong { font-size:11px; }
+  .topbar-status { flex:0 0 auto; }
+  .brand-divider { display:none; }
+  .workspace-heading,.fleet-shell .workspace-heading { flex-wrap:wrap; gap:18px; }
+  .workspace-heading h1,.fleet-shell .workspace-heading h1 { max-width:none; font-size:30px; }
+  .workspace-heading p,.fleet-shell .workspace-heading p { max-width:none; font-size:16px; }
+  .clock-block { align-items:flex-start; }
+  .clock-block>span { max-width:none; }
+  .workspace-toolbar nav { gap:15px; height:auto; padding:10px 0; }
+  .workspace-toolbar nav button { font-size:14px; }
+  .scenario-choice { gap:9px; }
+  .scenario-choice select { min-width:0; width:100%; }
+  .filing-actions { flex-direction:column; }
+  .filing-actions>button { width:100%; }
+  .fleet-stats { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .fleet-stats>div { padding:14px; }
+  .panel-heading,.fleet-control-room .flight-strips .panel-heading { font-size:13px; }
+  .sky-heading { height:auto; }
+  .map-legend { flex-wrap:wrap; }
+  .map-title-overlay { top:12px; left:12px; max-width:63%; }
+  .map-title-overlay h2 { font-size:20px; }
+  .map-title-overlay p,.map-title-overlay .eyebrow { font-size:12px; }
+  .map-layer-controls { right:8px; top:8px; }
+  .map-layer-controls button { padding:8px; }
+  .selected-flight-overlay,.encounter-overlay { display:none; }
+  .altitude-legend { position:static; padding:10px; }
+  .altitude-legend button { font-size:12px; padding:7px; }
+  .map-caption { font-size:12px; padding:10px; }
+  .map-caption>span { width:100%; }
+  .study-shell main { padding:0 14px; }
+  .hardware-panel { display:block; }
+}
