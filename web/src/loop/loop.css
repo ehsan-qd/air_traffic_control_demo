@@ -72,7 +72,19 @@ html:has(.loop-root),body:has(.loop-root) { margin:0; height:100%; overflow:hidd
 .loop-stats strong { display:block; font-size:5.4vh; font-weight:500; font-variant-numeric:tabular-nums; line-height:1; }
 .loop-stats span { display:block; margin-top:.8vh; font-size:1.5vh; letter-spacing:.14em; text-transform:uppercase; color:var(--loop-muted); }
 .loop-stats .good strong { color:var(--loop-green); }
-.loop-legend { position:absolute; right:2vw; bottom:3vh; display:flex; flex-direction:column-reverse; gap:.9vh; padding:1.2vh 1vw; border-radius:.8vh; background:#020608b3; font-size:1.5vh; color:var(--loop-muted); letter-spacing:.08em; }
+.loop-corner { position:absolute; right:2vw; bottom:3vh; display:flex; align-items:flex-end; gap:1.2vw; }
+.loop-qr { margin:0; display:flex; flex-direction:column; align-items:center; gap:.9vh; padding:1vh; border-radius:1vh; background:#020608b3; border:1px solid #7fe3ff66; box-shadow:0 0 2.4vh #7fe3ff55, 0 0 .8vh #7fe3ff44 inset; animation:loop-qr-glow 7s cubic-bezier(.45,0,.55,1) infinite; }
+/* A slow, deep heartbeat: a soft double swell, then a long rest. The glow never goes out. */
+@keyframes loop-qr-glow {
+  0%,62%,100% { border-color:#7fe3ff55; box-shadow:0 0 2vh #7fe3ff33, 0 0 .6vh #7fe3ff22 inset; }
+  14% { border-color:#9fdcff80; box-shadow:0 0 3.2vh #9fd8ff4d, 0 0 .9vh #7fe3ff33 inset; }
+  24% { border-color:#8fdfff66; box-shadow:0 0 2.6vh #8fdcff3d, 0 0 .7vh #7fe3ff2a inset; }
+  36% { border-color:#b6c4ff80; box-shadow:0 0 3.6vh #b9b4ff52, 0 0 1vh #c9a7ff33 inset; }
+}
+.loop-qr img { display:block; width:15vh; height:15vh; border-radius:.6vh; background:#fff; }
+.loop-qr figcaption { font-size:1.5vh; color:var(--loop-ink); text-align:center; line-height:1.3; }
+.loop-qr figcaption span { display:block; font-size:1.15vh; letter-spacing:.28em; font-weight:600; color:var(--loop-cyan); }
+.loop-legend { display:flex; flex-direction:column-reverse; gap:.9vh; padding:1.2vh 1vw; border-radius:.8vh; background:#020608b3; font-size:1.5vh; color:var(--loop-muted); letter-spacing:.08em; }
 .loop-legend span { display:flex; align-items:center; gap:.6vw; }
 .loop-legend i { width:1.6vh; height:.5vh; border-radius:2px; background:var(--c); box-shadow:0 0 1vh var(--c); }
 
@@ -148,5 +160,5 @@ html:has(.loop-root),body:has(.loop-root) { margin:0; height:100%; overflow:hidd
   .loop-panel { border-left:0; border-top:1px solid var(--loop-line); }
 }
 @media (prefers-reduced-motion:reduce) {
-  .loop-wind,.loop-plane .halo,.loop-conflict .ring { animation:none; }
+  .loop-wind,.loop-plane .halo,.loop-conflict .ring,.loop-qr { animation:none; }
 }

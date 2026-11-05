@@ -215,7 +215,10 @@ function LoopStage({ timeline }: { timeline: LoopTimeline }) {
         <div><strong>{done.length}</strong><span>conflicts resolved</span></div>
         <div className="good"><strong>{timeline.lossesAt(t)}</strong><span>separation losses</span></div>
       </div>
-      <div className="loop-legend">{[310, 330, 350, 370, 390, 410].map(l => <span key={l} style={{ '--c': levelColour(l) } as React.CSSProperties}><i/>FL{l}</span>)}</div>
+      <div className="loop-corner">
+        <div className="loop-legend">{[310, 330, 350, 370, 390, 410].map(l => <span key={l} style={{ '--c': levelColour(l) } as React.CSSProperties}><i/>FL{l}</span>)}</div>
+        <figure className="loop-qr"><img src="/images/case-study-qr.svg" alt="QR code linking to the Quantum Dice × NATS case study"/><figcaption><span>SCAN FOR</span>The full case study</figcaption></figure>
+      </div>
     </div>
 
     <SolverPanel encounter={encounter} phase={phase} t={t} recordedSpeed={recordedSpeed} progress={progress} done={done}/>
